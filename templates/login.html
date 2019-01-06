@@ -1,0 +1,24 @@
+{% extends 'bootstrap.html' %}
+{% block title %}
+	登陆
+{% endblock %}
+{% block main %}
+	<div class="conteiner">
+		<div class="row">
+			<div class="col-xs-4 col-xs-offset-4">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title">LOGIN</h3>
+					</div>
+					<div class="panel-body">
+						<form action="" method="POST">
+							{% csrf_token %}
+							{{ login_form }}
+							<input type="submit" value="登陆" class="btn btn-primary pull-right" style="margin-top:2em">
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

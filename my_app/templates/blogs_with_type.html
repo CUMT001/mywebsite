@@ -1,0 +1,56 @@
+{% extends "bootstrap.html" %}
+{% block title %}
+	{{ blog_type.typename }}
+{% endblock %}
+{% block main %}
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h3 class="panel-title">{{ blog_type.typename }}</h3>
+		</div>
+		<div class="panel-body">
+			<div>
+			<ul class="list-group">
+				{% for article in blogs %}
+					<li class="list-group-item">
+						<a href="{% url 'article_de' article.id %}">
+						{{ article.title }}
+						</a>
+						<p>{{ article.auth }}</p>
+						{{ article.content|truncatechars:60 }}
+					</li>
+				{% endfor %}
+			</ul>
+			</div>
+			<div>
+				<p>共有{{ articles|length }}篇文章</p>
+			</div>
+			<div>
+				<nav aria-label="Page navigation">
+				<ul class="pagination">
+					<li>
+						{% if this_page.has_previous %}
+						<a href="?page={{this_page.previous_page_number}}" aria-label="Previous">
+							<span aria-hidden="true">&laquo;</span>
+						</a>
+						{% endif %}
+					</li>
+					{% for page_num in page_range %}
+						{% if page_num == this_page.number %}
+							<li class="active"><a href="?page={{page_num}}">{{page_num}}</a></li>
+						{% else %}
+							<li><a href="?page={{page_num}}">{{page_num}}</a></li>
+						{% endif %}
+					{% endfor %}
+					<li>
+						{% if this_page.has_next %}
+						<a href="?page={{this_page.next_page_number}}" aria-label="Next">
+							<span aria-hidden="true">&raquo;</span>
+						</a>
+						{% endif %}
+					</li>
+				</ul>
+				</nav>
+			</div>
+		</div>
+	</div>
+{% endblock %}
